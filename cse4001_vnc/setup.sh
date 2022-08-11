@@ -26,6 +26,7 @@ apt-get install wget\
   kakoune\
   micro\
   neovim\
+  file \
     -y
 
 # Create some directories and set the PATH
@@ -172,6 +173,11 @@ bmake install
 # make  sys161.conf configuration file
 cd ${HOME}/os161/root/ 
 cp $HOME/os161/toolbuild/sys161-2.0.8/sys161.conf.sample sys161.conf
+
+# copy over tool binaries
+cp $HOME/os161/tools/bin/* /bin/.
+rm -rf $HOME/os161/src
+rm -rf $HOME/os161/toolbuild
 
 # Create two disk files of 25MB each
 cd ${HOME}/os161/root/ 
