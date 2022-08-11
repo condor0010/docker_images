@@ -19,7 +19,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     apt-utils \
     apktool \
     atomicparsley \
-    audacity \
+#    audacity \
     audispd-plugins \
     auditd \
     autoconf \
