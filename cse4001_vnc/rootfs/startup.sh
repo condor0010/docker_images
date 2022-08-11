@@ -97,4 +97,12 @@ done
 PASSWORD=
 HTTP_PASSWORD=
 
+# fixup os161 permissions
+mv /home/ubuntu/os161 /home/$USERNAME/os161
+chown -R $USERNAME  /home/$USERNAME/os161
+
 exec /usr/local/bin/tini -- supervisord -n -c /etc/supervisor/supervisord.conf
+
+
+
+

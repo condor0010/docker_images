@@ -17,7 +17,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     apt-utils \
     apktool \
     atomicparsley \
-    audacity \
+    #audacity \
     audispd-plugins \
     auditd \
     autoconf \
@@ -84,6 +84,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     pcapfix \
     pkg-config \
     pngcheck \
+    #pngtools
     powershell-empire \
     python2 \
     python2-dev \
@@ -102,7 +103,8 @@ RUN apt-get install -y --ignore-missing afl-* \
     sagemath \ 
     shellter \
     silenttrinity \
-    #snort \
+    snapd \
+    # snort \
     sonic-visualiser \
     sox \ 
     sqlite3 \
@@ -130,6 +132,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     zstd  --fix-missing && \
     rm -rf /var/lib/apt/lists/*
 
+RUN snap install -y audacity
 
 # python3 pip installs
 RUN python3 -m pip install --no-cache-dir \
