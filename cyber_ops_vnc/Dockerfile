@@ -1,4 +1,4 @@
-FROM tjoconnor/cyber_ops
+FROM tjoconnor/cyber_ops as base
 
 RUN apt-get update
 RUN apt-get -y upgrade
@@ -40,7 +40,7 @@ WORKDIR /home/kali/
 RUN sudo usermod --shell /bin/bash kali
 COPY config /home/kali/.config/
 
-# Entrypoint
+# Entrypoint to start VNC
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
