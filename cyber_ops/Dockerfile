@@ -132,8 +132,6 @@ RUN apt-get install -y --ignore-missing afl-* \
     zstd  --fix-missing && \
     rm -rf /var/lib/apt/lists/*
 
-RUN snap install -y audacity
-
 # python3 pip installs
 RUN python3 -m pip install --no-cache-dir \
     alive_progress \
