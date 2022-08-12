@@ -1,23 +1,31 @@
 #!/bin/bash
 
+# Start postgresql and add user for msfdb
+
+service postgresql start
+msfdb init > /dev/null 2>&1 & 
+
 # Set password for VNC
 
-sudo rm /tmp/.X0-lock \
-	/tmp/.X11-unix/X0 \
-	> /dev/null 2>&1
-
-mkdir -p /home/kali/.vnc/
-echo $VNCPWD | vncpasswd -f > /home/kali/.vnc/passwd
-chmod 600 /home/kali/.vnc/passwd
+mkdir -p /root/.vnc/
+echo $VNCPWD | vncpasswd -f > /root/.vnc/passwd
+chmod 600 /root/.vnc/passwd
 
 # Start VNC server
-vncserver :0 -rfbport $VNCPORT -geometry $VNCDISPLAY -depth $VNCDEPTH -localhost \
-  > /dev/null 2>&1 &
 
-# Start noVNC server
+if [ $VNCEXPOSE = 1 ]
+then
+  # Expose VNC
+  vncserver :0 -rfbport $VNCPORT -geometry $VNCDISPLAY -depth $VNCDEPTH \
+    > /var/log/vncserver.log 2>&1
+else
+  # Localhost only
+  vncserver :0 -rfbport $VNCPORT -geometry $VNCDISPLAY -depth $VNCDEPTH -localhost \
+    > /var/log/vncserver.log 2>&1
+fi
 
 /usr/share/novnc/utils/launch.sh --listen $NOVNCPORT --vnc localhost:$VNCPORT \
-  > /dev/null 2>&1 &
+  > /var/log/novnc.log 2>&1 &
 
 echo "Launch your web browser and open http://localhost:9020/vnc.html"
 
