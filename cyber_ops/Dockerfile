@@ -129,7 +129,18 @@ RUN apt-get install -y --ignore-missing afl-* \
     bro-aux \
     zsh \
     zlib1g-dev \
-    zstd  --fix-missing && \
+    zstd  \
+    kali-tools-fuzzing \
+    kali-tools-crypto-stego \
+    kali-tools-802-11 \
+    kali-tools-bluetooth \
+    kali-tools-sdr \
+    kali-tools-voip \
+    kali-tools-wireless \
+    kali-tools-passwords \
+    kali-tools-web \
+    kali-tools-reverse-engineering \
+    kali-tools-forensics --fix-missing && \
     rm -rf /var/lib/apt/lists/*
 
 # python3 pip installs
@@ -171,6 +182,10 @@ RUN python3 -m pip install --no-cache-dir \
     urh \
     z3-solver \
     xortool 
+
+# install angrop from source -- fixes "rop" import error
+RUN cd /opt/ && git clone https://github.com/angr/angrop && \
+    cd angrop && pip3 install . 
 
 # install python2.7 pip
 RUN cd /opt/ && \
