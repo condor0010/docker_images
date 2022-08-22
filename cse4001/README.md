@@ -1,4 +1,6 @@
 # os161 docker setup
 
-## install docker https://docs.docker.com/get-docker/
-## run docker run --name os161 -it condor0010/cse4001 /bin/bash
+For help installing docker: 
+https://github.com/FITSEC/docker_images/tree/main/cse1001_vnc/docker_help
+
+run:
