@@ -40,6 +40,11 @@ Default run command:
 docker run -d -p 6080:80 -v $PWD:/home/cse1001/workspace:rw -e VNC_PASSWORD=changeme --name cse1001 cse1001-novnc
 ```
 
+Default pull/run command from Docker Hub:
+```
+docker run -d -p 6080:80 -v $PWD:/home/cse1001/workspace:rw -e VNC_PASSWORD=changeme --name test_command tjoconnor/cse1001_vnc
+```
+
 Browse http://127.0.0.1:6080/
 
 * You can add ```--rm``` before the -d tag to have the container automatically removed when stopped (be careful about where you save your work in this instance).
