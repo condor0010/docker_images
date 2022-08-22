@@ -22,7 +22,7 @@ Important
 
 <p>&nbsp;</p>  
 
-This [folder](https://github.com/kourtnee/cse1001-novnc/tree/master/docker_help) has help for the following:  
+This [folder](https://github.com/FITSEC/docker_images/tree/main/cse1001_vnc/docker_help) has help for the following:  
 * Navigating docker containers  
 * Setting up docker on Mac (Intel and M1), Windows, and Linux
 
