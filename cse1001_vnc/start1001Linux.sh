@@ -1,8 +1,8 @@
 #!/bin/sh
 # Ubuntu 20.04LTS headless noVNC
 # Connect to http://localhost:6080/
-REPO=kourtnee/
-IMAGE=cse1001-novnc
+REPO=tjoconnor/
+IMAGE=cse1001
 TAG=latest
 URL=http://localhost:6080
 
