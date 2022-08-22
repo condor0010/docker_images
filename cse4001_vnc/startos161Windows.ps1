@@ -2,8 +2,8 @@
 # Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
 
 ## These set the variables to pull from the proper repo on docker hub ##
-$REPO="kourtnee/"
-$IMAGE="os161-novnc"
+$REPO="tjoconnor/"
+$IMAGE="cse4001_vnc"
 $TAG="latest"
 $VNC_PASS="changeme"
 
