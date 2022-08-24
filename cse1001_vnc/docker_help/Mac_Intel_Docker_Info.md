@@ -121,7 +121,7 @@
   <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/finder4.png" />
 </p>
 
-* A new terminal will pop open and you should paste the docker run command into it, change "changeme" to a password of your choosing and hit enter
+* A new terminal will pop open and you should paste the docker run command into it, change "changeme" to a password of your choosing, navigate using the arrow keys as the mouse does not work to select a place in the terminal, and hit enter
 
 <p align="center">
   <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm8.jpeg" />
