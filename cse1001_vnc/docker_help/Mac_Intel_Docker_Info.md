@@ -91,3 +91,93 @@
 <p align="center">
   <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/dockermac14.png" />
 </p>
+
+## 2. Create a folder/directory for the class
+* There are two ways to do this. The first will be more familiar, but the second is good to know, and you will have to learn it eventually
+
+### A. Use Finder to create the file/directory  
+* Click on the finder icon on the task bar
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/finder1.png" />
+</p>
+
+* Navigate to the Documents tab by clicking on it in the left of the window
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/finder2.png" />
+</p>
+
+* Right click in the main area and select New Folder  
+* Rename it to cse1001 for the class
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/finder3.png" />
+</p>
+
+* Right click on the folder and select "New Terminal at Folder"
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/finder4.png" />
+</p>
+
+* A new terminal will pop open and you should paste the docker run command into it, change "changeme" to a password of your choosing and hit enter
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm8.jpeg" />
+</p>
+
+```
+docker run --detach --publish 6080:80 --volume "${PWD}":/home/cse1001/workspace:rw --env VNC_PASSWORD=changeme --env RESOLUTION=1400x825 --name cse1001_vnc tjoconnor/cse1001_vnc:latest
+```
+
+### B. Alternatively you could navigate in the terminal to create the directory/folder
+* Hit Command + Space to open up the search
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm1.jpeg" />
+</p>
+
+* Type in the word "terminal"
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm2.jpeg" />
+</p>
+
+* A new terminal will pop open
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm4.png" />
+</p>
+
+* Type in the term "ls" this lists the contents of your current folder/directory, in theory it should open up in your "home" folder
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm5.jpeg" />
+</p>
+
+* Now type in the term "mkdir cse1001", mkdir means make directory (or folder) and cse1001 is the name of the folder you're creating. Repeat "ls" to see that it is now in your home folder.
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm5.png" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm6.png" />
+</p>
+
+* Next type in "cd cse1001", cd means change directory (or folder), this will place you inside the folder you just created.
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm7.png" />
+</p>
+
+* You should paste the docker run command into the terminal, then change "changeme" to a password of your choosing and hit enter
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm8.jpeg" />
+</p>
+
+```
+docker run --detach --publish 6080:80 --volume "${PWD}":/home/cse1001/workspace:rw --env VNC_PASSWORD=changeme --env RESOLUTION=1400x825 --name cse1001_vnc tjoconnor/cse1001_vnc:latest
+```
