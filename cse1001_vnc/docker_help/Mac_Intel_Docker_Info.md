@@ -131,6 +131,9 @@
 docker run --detach --publish 6080:80 --volume "${PWD}":/home/cse1001/workspace:rw --env VNC_PASSWORD=changeme --env RESOLUTION=1400x825 --name cse1001_vnc tjoconnor/cse1001_vnc:latest
 ```
 
+* Open a browser of your choice (I suggest Firefox) paste one of the following (they mean the same thing): http://127.0.0.1:6080/  or  http://localhost:6080
+
+
 ### B. Alternatively you could navigate in the terminal to create the directory/folder
 * Hit Command + Space to open up the search
 
@@ -181,3 +184,5 @@ docker run --detach --publish 6080:80 --volume "${PWD}":/home/cse1001/workspace:
 ```
 docker run --detach --publish 6080:80 --volume "${PWD}":/home/cse1001/workspace:rw --env VNC_PASSWORD=changeme --env RESOLUTION=1400x825 --name cse1001_vnc tjoconnor/cse1001_vnc:latest
 ```
+
+* Open a browser of your choice (I suggest Firefox) paste one of the following (they mean the same thing): http://127.0.0.1:6080/  or  http://localhost:6080
