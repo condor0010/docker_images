@@ -156,7 +156,7 @@ docker run --detach --publish 6080:80 --volume "${PWD}":/home/cse1001/workspace:
 * Type in the term "ls" this lists the contents of your current folder/directory, in theory it should open up in your "home" folder
 
 <p align="center">
-  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm5.jpeg" />
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/macterm4.png" />
 </p>
 
 * Now type in the term "mkdir cse1001", mkdir means make directory (or folder) and cse1001 is the name of the folder you're creating. Repeat "ls" to see that it is now in your home folder.
