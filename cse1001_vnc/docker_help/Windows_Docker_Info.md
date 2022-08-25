@@ -150,3 +150,19 @@ docker run --detach --publish 6080:80 --volume "${PWD}":/home/cse1001/workspace:
 ```
 
 * Open a browser of your choice (I suggest Firefox) paste one of the following (they mean the same thing): http://127.0.0.1:6080/  or  http://localhost:6080
+
+
+## 4. Stopping and starting the container
+* The GUI (Graphical User Interface) for docker allows starting and stopping to be very simple.
+
+* To stop hit the square icon between the refresh and trash icons
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/gui1.png" />
+</p>
+
+* To start hit the play (triangle) icon
+
+<p align="center">
+  <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/gui2.png" />
+</p>
