@@ -163,6 +163,8 @@ RUN python3 -m pip install --no-cache-dir \
     pefile \
     progress \
     pwnscripts \
+    pycipher \
+    pycryptodome \
     pyfiglet \
     pymaat \ 
     pwntools \
@@ -234,6 +236,37 @@ RUN cd /opt/ && \
 RUN cd /opt/ && \
     git clone https://github.com/craigz28/firmwalker.git 
 
+# binwalk builds
+
+# Install jefferson to extract JFFS2 file systems
+RUN pip3 install cstruct && \
+    git clone https://github.com/sviehb/jefferson /tmp/jefferson && \
+    cd /tmp/jefferson && \
+    python3 setup.py install && \
+    cd / && \
+    rm -rf /tmp/jefferson
+
+# Install ubi_reader to extract UBIFS file systems
+RUN git clone https://github.com/jrspruitt/ubi_reader /tmp/ubi_reader && \
+    cd /tmp/ubi_reader && \
+    python3 setup.py install && \
+    cd / && \
+    rm -rf /tmp/ubi_reader
+
+# Install yaffshiv to extract YAFFS file systems
+RUN git clone https://github.com/devttys0/yaffshiv /tmp/yaffshiv && \
+    cd /tmp/yaffshiv && \
+    python3 setup.py install && \
+    cd / && \
+    rm -rf /tmp/yaffshiv
+
+# Install unstuff (closed source) to extract StuffIt archive files
+RUN mkdir -p /tmp/unstuff && \
+    cd /tmp/unstuff && \
+    wget -O - https://downloads.tuxfamily.org/sdtraces/stuffit520.611linux-i386.tar.gz | tar -zxv && \
+    install -m 0755 bin/unstuff /usr/local/bin/ && \
+    rm -rf /tmp/unstuff
+
 # install DidierStevensSuite (ole parsing)
 RUN cd /opt/ && \
     git clone https://github.com/DidierStevens/DidierStevensSuite && \
@@ -293,6 +326,13 @@ RUN wget -O /usr/local/bin/slink \
 
 ## re installs ##
 
+# install tigress obfuscator
+
+COPY tigress.tar.gz /opt/. 
+RUN cd /opt/ && tar -xvzf tigress.tar.gz 
+ENV TIGRESS_HOME=/opt/tigress/3.1
+ENV PATH=$PATH:/opt/tigress/3.1
+
 # install mobsf for android/ioS RE: TODO
 
 # install movobfuscator compiler
@@ -310,6 +350,8 @@ RUN wget https://github.com/radareorg/radare2/releases/download/4.4.0/radare2_4.
 RUN cd /opt/ && \
     git clone https://github.com/yrp604/rappel && \
      cd rappel && CC=clang make
+
+ENV PATH=$PATH:/opt/rappel/bin/
 
 ## pwn installs ##
 
