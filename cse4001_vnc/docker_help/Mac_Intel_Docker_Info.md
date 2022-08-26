@@ -109,7 +109,7 @@
 </p>
 
 * Right click in the main area and select New Folder  
-* Rename it to cse1001 for the class
+* Rename it to cse4001 for the class
 
 <p align="center">
   <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/finder3.png" />
