@@ -402,6 +402,9 @@ ENV LANG en_US.UTF-8
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)" -- \
     -t crunch
 
+# temp fix for pwntools asm linker issues
+COPY asm.py /usr/local/lib/python3.10/dist-packages/pwnlib/asm.py
+
 WORKDIR /root/workspace
 RUN cd /root/workspace
 ENTRYPOINT ["/bin/zsh"]
