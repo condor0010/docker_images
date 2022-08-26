@@ -84,7 +84,7 @@ https://docs.microsoft.com/en-us/windows/wsl/install-manual
 </p>
 
 * Right click in the main area and select New Folder  
-* Rename it to cse1001 for the class
+* Rename it to cse4001 for the class
 
 <p align="center">
   <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/file3.png" />
@@ -94,7 +94,7 @@ https://docs.microsoft.com/en-us/windows/wsl/install-manual
   <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/file4.png" />
 </p>
 
-* Double click on the name cse1001 to go into the folder, then hold shift and right click in the folder and select "Open PowerShell window here"
+* Double click on the name cse4001 to go into the folder, then hold shift and right click in the folder and select "Open PowerShell window here"
 
 <p align="center">
   <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/file5.png" />
