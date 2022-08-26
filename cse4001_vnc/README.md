@@ -42,6 +42,7 @@ docker run -d -p 7080:80 -v $PWD:/home/cse4001/workspace:rw -e VNC_PASSWORD=chan
 Default pull/run command from Docker Hub:
 ```
 docker run -d -p 7080:80 -v $PWD:/home/cse4001/workspace:rw -e VNC_PASSWORD=changeme --name cse4001 tjoconnor/cse4001_vnc
+```
 
 Browse http://127.0.0.1:7080/
 
