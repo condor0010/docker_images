@@ -107,7 +107,7 @@ https://docs.microsoft.com/en-us/windows/wsl/install-manual
 </p>
 
 ```
-docker run -d -p 6080:80 -v "$(PWD):/home/cse1001/workspace:rw" -e "RESOLUTION=1440x900" -e "VNC_PASSWORD=changeme" --name "cse1001-run" "tjoconnor/cse1001:latest"
+docker run -d -p 6080:80 -v "$(PWD):/home/cse1001/workspace:rw" -e "RESOLUTION=1440x900" -e "VNC_PASSWORD=changeme" --name "cse1001-run" "tjoconnor/cse1001_vnc:latest"
 ```
 
 * Open a browser of your choice (I suggest Firefox) paste one of the following (they mean the same thing): http://127.0.0.1:6080/  or  http://localhost:6080
@@ -146,7 +146,7 @@ docker run -d -p 6080:80 -v "$(PWD):/home/cse1001/workspace:rw" -e "RESOLUTION=1
 </p>
 
 ```
-docker run -d -p 6080:80 -v "$(PWD):/home/cse1001/workspace:rw" -e "RESOLUTION=1440x900" -e "VNC_PASSWORD=changeme" --name "cse1001-run" "tjoconnor/cse1001:latest"
+docker run -d -p 6080:80 -v "$(PWD):/home/cse1001/workspace:rw" -e "RESOLUTION=1440x900" -e "VNC_PASSWORD=changeme" --name "cse1001-run" "tjoconnor/cse1001_vnc:latest"
 ```
 
 * Open a browser of your choice (I suggest Firefox) paste one of the following (they mean the same thing): http://127.0.0.1:6080/  or  http://localhost:6080
