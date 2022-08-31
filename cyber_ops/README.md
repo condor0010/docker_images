@@ -1,4 +1,4 @@
-If you need help with the installation of docker click here.
+If you need help with the installation of docker click [here](https://github.com/FITSEC/docker_images/tree/main/cse1001_vnc/docker_help).
 Keep in mind that the instructions are tailored for the CSE1001 course, but the steps will be the same. 
 
 Pull/run commands:
