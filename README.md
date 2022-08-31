@@ -1,4 +1,5 @@
 # Docker Images
+For more information on the images, instructions, and commands for additional platforms click on the name of the course you want to view.
 
 ## Images
 
