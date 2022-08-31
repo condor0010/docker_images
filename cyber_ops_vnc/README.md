@@ -15,6 +15,6 @@ docker run -p 8888:80 --cap-add=SYS_PTRACE --cap-add=SYS_ADMIN --cap-add=audit_c
 ```
 
 M1/M2 Mac:
-``
+```
 docker run -p 8888:80 --cap-add=SYS_PTRACE --cap-add=SYS_ADMIN --cap-add=audit_control --security-opt seccomp=unconfined --privileged --platform linux/amd64 --name=cyber_ops_vnc tjoconnor/cyber_ops_vnc
 ```
