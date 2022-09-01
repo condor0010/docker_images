@@ -128,7 +128,7 @@
 </p>
 
 ```
-docker run -d -p 7080:80 -v "${PWD}":/home/cse4001/workspace:rw -e VNC_PASSWORD=changeme -e RESOLUTION=1400x825 --name cse4001_vnc tjoconnor/cse4001_vnc:latest
+docker run -d -p 7080:80 -v $(PWD):/home/cse4001/workspace:rw -e VNC_PASSWORD=changeme -e RESOLUTION=1400x825 --name cse4001_vnc tjoconnor/cse4001_vnc:latest
 ```
 
 * Open a browser of your choice (I suggest Firefox) paste one of the following (they mean the same thing): http://127.0.0.1:7080/  or  http://localhost:7080
@@ -182,7 +182,7 @@ docker run -d -p 7080:80 -v "${PWD}":/home/cse4001/workspace:rw -e VNC_PASSWORD=
 </p>
 
 ```
-docker run -d -p 7080:80 -v "${PWD}":/home/cse4001/workspace:rw -e VNC_PASSWORD=changeme -e RESOLUTION=1400x825 --name cse4001_vnc tjoconnor/cse4001_vnc:latest
+docker run -d -p 7080:80 -v $(PWD):/home/cse4001/workspace:rw -e VNC_PASSWORD=changeme -e RESOLUTION=1400x825 --name cse4001_vnc tjoconnor/cse4001_vnc:latest
 ```
 
 * Open a browser of your choice (I suggest Firefox) paste one of the following (they mean the same thing): http://127.0.0.1:7080/  or  http://localhost:7080
