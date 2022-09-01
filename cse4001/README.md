@@ -8,15 +8,15 @@ These commands include the bind/mount of a folder from the docker to your host c
 
 Windows: 
 ```
-docker run -v "$(PWD):/root/workspace" -ti --cse4001 tjoconnor/cse4004:latest
+docker run -v "$(PWD):/root/workspace" -ti --name cse4001 tjoconnor/cse4001:latest
 ```
 
 Linux/Intel Mac:
 ```
-docker run -v $(PWD):/root/workspace -ti --cse4001 tjoconnor/cse4004:latest
+docker run -v $(PWD):/root/workspace -ti --name cse4001 tjoconnor/cse4001:latest
 ```
 
 M1/M2 Mac:
 ```
-docker run -v $(PWD):/root/workspace -ti --platform linux/amd64 --cse4001 tjoconnor/cse4004:latest
+docker run -v $(PWD):/root/workspace -ti --platform linux/amd64 --name cse4001 tjoconnor/cse4004:latest
 ```
