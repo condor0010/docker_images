@@ -200,6 +200,6 @@ docker run -d -p 7080:80 -v $(PWD):/home/cse4001/workspace:rw -e VNC_PASSWORD=ch
 
 <p align="center">
   <img src="https://github.com/FITSEC/docker_images/blob/main/cse1001_vnc/images/gui2.png" />
-</p>
+</p> 
 
 * For information on navigating docker via the terminal click [here](https://github.com/FITSEC/docker_images/blob/main/cse4001_vnc/docker_help/Navigating_Containers.md)
