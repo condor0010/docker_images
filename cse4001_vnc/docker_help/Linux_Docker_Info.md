@@ -71,3 +71,14 @@ Use the following command to make the change effective, if for some reason it do
 ```groups```   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - If there is an error try the previous command with your username.   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - If your user isn’t in the group, go back to step 3  
+
+## 5. Create a folder for the class, and run the docker command inside of it:
+
+I assume by this point you know how to create a folder and use a terminal at its location. If you need help with that, the Mac instructions are very similar to what you'd encounter in Linux.
+
+In the terminal inside the folder you created for this course, CSE4001, paste the following command (change the VNC_PASSWORD to your preferred password):
+```
+docker run -d -p 7080:80 -v $PWD:/home/cse4001/workspace:rw -e VNC_PASSWORD=changeme --name cse4001-vnc tjoconnor/cse4001_vnc
+```
+
+* For information on navigating docker via the terminal click [here](https://github.com/FITSEC/docker_images/blob/main/cse4001_vnc/docker_help/Navigating_Containers.md)
