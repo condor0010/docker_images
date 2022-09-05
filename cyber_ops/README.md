@@ -11,10 +11,10 @@ docker run -v "$(PWD):/root/workspace" --cap-add=SYS_PTRACE --cap-add=SYS_ADMIN 
 
 Linux/Intel Mac:
 ```
-docker run --cap-add=SYS_PTRACE --cap-add=SYS_ADMIN --cap-add=audit_control --security-opt seccomp=unconfined --privileged -ti --name=cyber_ops tjoconnor/cyber_ops
+docker run -v $PWD:/root/workspace --cap-add=SYS_PTRACE --cap-add=SYS_ADMIN --cap-add=audit_control --security-opt seccomp=unconfined --privileged -ti --name=cyber_ops tjoconnor/cyber_ops
 ```
 
 M1/M2 Mac:
 ```
-docker run --cap-add=SYS_PTRACE --cap-add=SYS_ADMIN --cap-add=audit_control --security-opt seccomp=unconfined --privileged --platform linux/amd64  -ti --name=cyber_ops tjoconnor/cyber_ops
+docker run -v $PWD:/root/workspace --cap-add=SYS_PTRACE --cap-add=SYS_ADMIN --cap-add=audit_control --security-opt seccomp=unconfined --privileged --platform linux/amd64  -ti --name=cyber_ops tjoconnor/cyber_ops
 ```
