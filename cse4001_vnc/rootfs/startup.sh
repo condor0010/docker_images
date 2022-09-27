@@ -42,7 +42,7 @@ if [ "$USER" != "root" ]; then
         UIDOPT="--non-unique --uid"
         UIDVAL=$USERID
     fi
-    useradd --create-home --skel /root --shell /bin/bash --user-group --groups adm,sudo $UIDOPT $UIDVAL $USER
+    #useradd --create-home --skel /root --shell /bin/bash --user-group --groups adm,sudo $UIDOPT $UIDVAL $USER
     HOME=/home/$USER
     echo "$USER:$PASSWORD" | chpasswd
     cp -r /root/{.profile,.bashrc,.config,.gtkrc-2.0,.gtk-bookmarks} ${HOME}
