@@ -182,7 +182,9 @@ ENV HOME=/home/ubuntu \
     SHELL=/bin/bash
 HEALTHCHECK --interval=30s --timeout=5s CMD curl --fail http://127.0.0.1:6079/api/health
 
+USER root
 COPY setup.sh /setup.sh
 RUN chmod +x /setup.sh && /setup.sh
 
+USER ubuntu
 ENTRYPOINT ["/startup.sh"]
