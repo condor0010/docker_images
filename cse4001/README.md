@@ -18,5 +18,5 @@ docker run -v $(PWD):/root/workspace -ti --name cse4001 tjoconnor/cse4001:latest
 
 M1/M2 Mac:
 ```
-docker run -v $(PWD):/root/workspace -ti --platform linux/amd64 --name cse4001 tjoconnor/cse4004:latest
+docker run -v $(PWD):/root/workspace -ti --platform linux/amd64 --name cse4001 tjoconnor/cse4001:latest
 ```
