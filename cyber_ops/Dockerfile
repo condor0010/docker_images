@@ -6,9 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/New_York
 
 # autoupdate dist/missing packages
-RUN apt-get clean -y && apt-get update -y && apt-get dist-upgrade -y 
-RUN apt-get update --fix-missing -y
-RUN apt-get update -y && apt-get upgrade -y 
+RUN apt-get clean -y && apt-get update -qq -y && apt-get dist-upgrade -qq -y && apt-get upgrade -qq -y
 
 # apt-get installs
 RUN apt-get update -y 
@@ -100,7 +98,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     rpm2cpio \
     ruby \
     ruby-dev \
-    sagemath \ 
+    # sagemath \ 
     shellter \
     silenttrinity \
     snapd \
@@ -125,7 +123,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     xxd \
     wget \
     wifite \
-    zeek \
+    #zeek \
     bro-aux \
     zsh \
     zlib1g-dev \
@@ -261,11 +259,11 @@ RUN git clone https://github.com/devttys0/yaffshiv /tmp/yaffshiv && \
     rm -rf /tmp/yaffshiv
 
 # Install unstuff (closed source) to extract StuffIt archive files
-RUN mkdir -p /tmp/unstuff && \
-    cd /tmp/unstuff && \
-    wget -O - https://downloads.tuxfamily.org/sdtraces/stuffit520.611linux-i386.tar.gz | tar -zxv && \
-    install -m 0755 bin/unstuff /usr/local/bin/ && \
-    rm -rf /tmp/unstuff
+#RUN mkdir -p /tmp/unstuff && \
+#    cd /tmp/unstuff && \
+#    wget -O - https://downloads.tuxfamily.org/sdtraces/stuffit520.611linux-i386.tar.gz | tar -zxv && \
+#    install -m 0755 bin/unstuff /usr/local/bin/ && \
+#    rm -rf /tmp/unstuff
 
 # install DidierStevensSuite (ole parsing)
 RUN cd /opt/ && \
@@ -387,9 +385,14 @@ RUN dpkg --add-architecture armhf && \
     apt-get -y install libssl-dev:armhf libssl-dev:armel libc6:i386 libncurses5:i386 libstdc++6:i386 libc6-dev-i386 && \
     rm -rf /var/lib/apt/lists/*
 
-# install apt-conflicts last
-#RUN apt-get install -y gcc-multilib  && \
-#   rm -rf /var/lib/apt/lists/*
+# install support for other architectures
+RUN apt-get update -qq -y && apt-get install -y \
+    gcc-aarch64-linux-gnu \
+    binutils-aarch64-linux-gnu && \
+    rm -rf /var/lib/apt/lists/*
+
+# downloads libc-database
+RUN cd /opt/ && git clone https://github.com/niklasb/libc-database && cd /opt/libc-database && ./get all
 
 # resolves issue with local environment
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
