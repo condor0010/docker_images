@@ -82,7 +82,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     pcapfix \
     pkg-config \
     pngcheck \
-    #pngtools
+    pngtools \
     powershell-empire \
     python2 \
     python2-dev \
@@ -340,10 +340,6 @@ RUN cd /opt && \
    ./build.sh && \
    ./install.sh
 
-# install radare (debugger)
-RUN wget https://github.com/radareorg/radare2/releases/download/4.4.0/radare2_4.4.0_amd64.deb && \
-    dpkg -i radare2_4.4.0_amd64.deb && rm radare2_4.4.0_amd64.deb
-
 # install rappel for emulateing assembly instructions
 RUN cd /opt/ && \
     git clone https://github.com/yrp604/rappel && \
@@ -374,7 +370,7 @@ RUN cd /opt/ && \
 
 
 # install pwninit for patching bins for ctfs     
-RUN wget -O /bin/pwninit https://github.com/io12/pwninit/releases/download/3.2.0/pwninit && \
+RUN wget -O /bin/pwninit https://github.com/io12/pwninit/releases/download/3.3.0/pwninit && \
     chmod +x /bin/pwninit 
 
 ## some cross-compilation stuff
@@ -382,7 +378,8 @@ RUN dpkg --add-architecture armhf && \
     dpkg --add-architecture armel && \
     dpkg --add-architecture i386 && \
     apt-get update -y && \
-    apt-get -y install libssl-dev:armhf libssl-dev:armel libc6:i386 libncurses5:i386 libstdc++6:i386 libc6-dev-i386 && \
+    apt-get -y install libssl-dev:armhf libssl-dev:armel libc6:i386 libncurses5:i386 libstdc++6:i386 libc6-dev-i386 \
+    gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu && \
     rm -rf /var/lib/apt/lists/*
 
 # install support for other architectures
@@ -392,7 +389,24 @@ RUN apt-get update -qq -y && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # downloads libc-database
-RUN cd /opt/ && git clone https://github.com/niklasb/libc-database && cd /opt/libc-database && ./get all
+RUN cd /opt/ && git clone https://github.com/niklasb/libc-database && cd /opt/libc-database && ./get ubuntu debian
+
+#### - Flowmeter Stuff for ML Classifier of Network Flows -- ####
+
+# python3 pip installs
+RUN python3 -m pip install --no-cache-dir \
+    scikit-learn \ 
+    GitPython \
+    semantic-version \
+    pandas
+
+# install zeek
+RUN cd /opt/ && \
+    git clone --recursive https://github.com/zeek/zeek && \
+    cd zeek && \
+    ./configure && \
+    make && \
+    make install
 
 # resolves issue with local environment
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
@@ -402,11 +416,13 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LANG en_US.UTF-8 
 
 # install omz theme
-RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)" -- \
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.4/zsh-in-docker.sh)" -- \
     -t crunch
 
+# fixed in recent release
 # temp fix for pwntools asm linker issues
-COPY asm.py /usr/local/lib/python3.10/dist-packages/pwnlib/asm.py
+# COPY asm.py /usr/local/lib/python3.10/dist-packages/pwnlib/asm.py
+
 
 WORKDIR /root/workspace
 RUN cd /root/workspace
