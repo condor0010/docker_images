@@ -225,10 +225,21 @@ RUN cd /opt/ && git clone https://github.com/ius/rsatool && \
 ## forensics installs ##
 
 # install volatility (memory forensics)
-RUN cd /opt/ && \
-    wget http://downloads.volatilityfoundation.org/releases/2.6/volatility_2.6_lin64_standalone.zip && \
-    unzip volatility_2.6_lin64_standalone.zip && \
-    ln -sf /opt/volatility_2.6_lin64_standalone/volatility_2.6_lin64_standalone /usr/local/bin/volatility
+#RUN cd /opt/ && \
+#    wget http://downloads.volatilityfoundation.org/releases/2.6/volatility_2.6_lin64_standalone.zip && \
+#    unzip volatility_2.6_lin64_standalone.zip && \
+#    ln -sf /opt/volatility_2.6_lin64_standalone/volatility_2.6_lin64_standalone /usr/local/bin/volatility
+
+
+RUN pip2 install distorm3==3.4.4
+RUN pip2 install pycrypto
+RUN git clone https://github.com/volatilityfoundation/volatility.git
+RUN chmod +x volatility/vol.py
+RUN mv volatility /opt
+RUN ln -s /opt/volatility/vol.py /usr/bin/vol.py
+RUN ln -s /opt/volatility/vol.py /usr/bin/volatility
+RUN sed -i '1s/.*/\#\!\/usr\/bin\/env python2/' /opt/volatility/vol.py
+
 
 # firmwalker (iot firmware crawler)
 RUN cd /opt/ && \
