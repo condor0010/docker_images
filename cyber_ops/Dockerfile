@@ -179,7 +179,7 @@ RUN python3 -m pip install --no-cache-dir \
     stego-lsb \
     sudo \
     unicorn \
-    urh \
+    #urh \
     z3-solver \
     xortool 
 
@@ -203,6 +203,8 @@ RUN pip install setuptools \
     pyusb==1.0.0 \
     tabulate==0.7.5 \
     six==1.10.0 \
+    distorm3==3.4.4 \
+    pycrypto \
     PySide2 \
     future \
     pyserial \
@@ -225,20 +227,11 @@ RUN cd /opt/ && git clone https://github.com/ius/rsatool && \
 ## forensics installs ##
 
 # install volatility (memory forensics)
-#RUN cd /opt/ && \
-#    wget http://downloads.volatilityfoundation.org/releases/2.6/volatility_2.6_lin64_standalone.zip && \
-#    unzip volatility_2.6_lin64_standalone.zip && \
-#    ln -sf /opt/volatility_2.6_lin64_standalone/volatility_2.6_lin64_standalone /usr/local/bin/volatility
-
-
-RUN pip2 install distorm3==3.4.4
-RUN pip2 install pycrypto
-RUN git clone https://github.com/volatilityfoundation/volatility.git
-RUN chmod +x volatility/vol.py
-RUN mv volatility /opt
-RUN ln -s /opt/volatility/vol.py /usr/bin/vol.py
-RUN ln -s /opt/volatility/vol.py /usr/bin/volatility
-RUN sed -i '1s/.*/\#\!\/usr\/bin\/env python2/' /opt/volatility/vol.py
+RUN cd /opt/ && git clone https://github.com/volatilityfoundation/volatility.git && \
+  chmod +x volatility/vol.py && \
+  ln -s /opt/volatility/vol.py /usr/bin/vol.py && \
+  ln -s /opt/volatility/vol.py /usr/bin/volatility && \
+  sed -i '1s/.*/\#\!\/usr\/bin\/env python2/' /opt/volatility/vol.py
 
 
 # firmwalker (iot firmware crawler)
@@ -256,11 +249,11 @@ RUN pip3 install cstruct && \
     rm -rf /tmp/jefferson
 
 # Install ubi_reader to extract UBIFS file systems
-RUN git clone https://github.com/jrspruitt/ubi_reader /tmp/ubi_reader && \
-    cd /tmp/ubi_reader && \
-    python3 setup.py install && \
-    cd / && \
-    rm -rf /tmp/ubi_reader
+#RUN git clone https://github.com/jrspruitt/ubi_reader /tmp/ubi_reader && \
+#    cd /tmp/ubi_reader && \
+#    python3 setup.py install && \
+#    cd / && \
+#    rm -rf /tmp/ubi_reader
 
 # Install yaffshiv to extract YAFFS file systems
 RUN git clone https://github.com/devttys0/yaffshiv /tmp/yaffshiv && \
@@ -438,3 +431,4 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
 WORKDIR /root/workspace
 RUN cd /root/workspace
 ENTRYPOINT ["/bin/zsh"]
+RUN apt install passwd -y ; chsh -s /bin/zsh
