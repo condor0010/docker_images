@@ -1,15 +1,21 @@
-FROM kalilinux/kali-rolling
+FROM kalilinux/kali-rolling:latest
 
 MAINTAINER tj <toconnor@fit.edu>
+LABEL maintainer="TJ <toconnor@fit.edu>"
+LABEL contributor="Louie <lorcinolo2020@my.fit.edu>"
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/New_York
 
-# autoupdate dist/missing packages
-RUN apt-get clean -y && apt-get update -qq -y && apt-get dist-upgrade -qq -y && apt-get upgrade -qq -y
-
+################################################################################
 # apt-get installs
-RUN apt-get update -y 
+################################################################################
+
+RUN apt-get clean -y && \
+    apt-get update -qq -y && \
+    apt-get upgrade -qq -y && \
+    apt-get update -y 
+
 RUN apt-get install -y --ignore-missing afl-* \
     aircrack-ng \
     apt-utils \
@@ -22,6 +28,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     autotools-dev \
     automake \
     bandit \
+    bc \ 
     binutils \
     binwalk \
     bison \
@@ -44,8 +51,6 @@ RUN apt-get install -y --ignore-missing afl-* \
     forensics-all \
     g++ \
     gcc \
-    gcc-arm-linux-gnueabi \
-    gcc-arm-linux-gnueabihf \
     gdb \
     gdb-multiarch \
     gdbserver \
@@ -63,6 +68,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     libevent-dev \
     libbluetooth-dev \
     libedit-dev \
+    libelf-dev \
     libgcrypt-dev \
     libpcap-dev \
     libseccomp-dev \
@@ -71,6 +77,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     libtool \
     libusb-1.0-0-dev \
     locales \
+    ltrace \
     make \
     man \
     mitmproxy \
@@ -78,6 +85,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     nasm \
     net-tools \
     ngrep \
+    passwd \
     patchelf \ 
     pcapfix \
     pkg-config \
@@ -91,14 +99,18 @@ RUN apt-get install -y --ignore-missing afl-* \
     python3-binwalk \
     python3-pip \
     python3-scapy \
+    qemu-system-common \
     qemu-system-mipsel \
+    qemu-system-misc \
+    qemu-system-x86 \
+    qemu-system-sparc \
     qemu-user \
     rfcat \
     rkhunter \
     rpm2cpio \
     ruby \
     ruby-dev \
-    # sagemath \ 
+    sagemath \ 
     shellter \
     silenttrinity \
     snapd \
@@ -106,6 +118,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     sonic-visualiser \
     sox \ 
     sqlite3 \
+    sudo \
     sqlmap \
     steghide \
     stegosuite \
@@ -123,7 +136,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     xxd \
     wget \
     wifite \
-    #zeek \
+    zeek \
     bro-aux \
     zsh \
     zlib1g-dev \
@@ -141,7 +154,10 @@ RUN apt-get install -y --ignore-missing afl-* \
     kali-tools-forensics --fix-missing && \
     rm -rf /var/lib/apt/lists/*
 
+################################################################################
 # python3 pip installs
+################################################################################
+
 RUN python3 -m pip install --no-cache-dir \
     alive_progress \
     angr \
@@ -152,9 +168,11 @@ RUN python3 -m pip install --no-cache-dir \
     capstone \
     cython \
     keystone-engine \
+    GitPython \
     log_symbols \
     mobsfscan \
     nuitka \ 
+    openai \ 
     opencv-python \
     pandas \
     pebble \
@@ -169,10 +187,12 @@ RUN python3 -m pip install --no-cache-dir \
     python-magic \
     pyradamsa \
     qiling \
+    randcrack \
     randomname \
     r2pipe \
     ropgadget \
     ropper \
+    semantic-version  \
     scikit-learn \
     smmap2 \
     spinners \
@@ -216,7 +236,9 @@ RUN pip install setuptools \
 RUN gem install one_gadget seccomp-tools && \
     rm -rf /var/lib/gems/2.*/cache/*
 
+################################################################################
 ## crypto installs ##
+################################################################################
 
 # install rsactftool (ctfs - rsa problems)
 RUN cd /opt/ && git clone https://github.com/Ganapati/RsaCtfTool
@@ -224,7 +246,9 @@ RUN cd /opt/ && git clone https://github.com/Ganapati/RsaCtfTool
 RUN cd /opt/ && git clone https://github.com/ius/rsatool && \
     cd rsatool && python3 setup.py install 
 
+################################################################################
 ## forensics installs ##
+################################################################################
 
 # install volatility (memory forensics)
 RUN cd /opt/ && git clone https://github.com/volatilityfoundation/volatility.git && \
@@ -277,17 +301,20 @@ RUN cd /opt/ && \
 
 # install osquery (hids)
 RUN cd /opt/ && \
-    wget https://pkg.osquery.io/deb/osquery_4.6.0-1.linux_amd64.deb && \
-    dpkg -I osquery_4.6.0-1.linux_amd64.deb
+    wget https://pkg.osquery.io/deb/osquery_5.8.1-1.linux_amd64.deb && \
+    dpkg -I osquery_5.8.1-1.linux_amd64.deb
 
+################################################################################
 ## rf installs ##
+################################################################################
+
 
 # install dump1090 (ads-b monitoring)
 RUN cd /opt && \
     git clone https://github.com/antirez/dump1090.git && \
     cd dump1090 && \
     make && \
-    ln -sf /opt/dump1090/dump1090 /usr/local/bin/dump109
+    ln -sf /opt/dump1090/dump1090 /usr/local/bin/dump1090
 
 # install killerbee (zigbee packet analysis)
 RUN cd /opt/ && \
@@ -309,7 +336,9 @@ RUN cd /opt/ && \
     cd Z3sec && \
     python2 setup.py install
 
+################################################################################
 ## stego installs ##
+################################################################################
 
 # install stegsolve
 RUN cd /opt && \
@@ -322,15 +351,19 @@ RUN cd /opt && \
 RUN wget -O /usr/local/bin/jsteg \
    https://github.com/lukechampine/jsteg/releases/download/v0.3.0/jsteg-linux-amd64 && \
    chmod +x /usr/local/bin/jsteg
+
+# install slink (stego tool)
 RUN wget -O /usr/local/bin/slink \
    https://github.com/lukechampine/jsteg/releases/download/v0.3.0/slink-linux-amd64 && \
    chmod +x /usr/local/bin/slink
 
+################################################################################
 ## re installs ##
+################################################################################
 
 # install tigress obfuscator
 
-COPY tigress.tar.gz /opt/. 
+COPY tigress.tar.gz /opt/.
 RUN cd /opt/ && tar -xvzf tigress.tar.gz 
 ENV TIGRESS_HOME=/opt/tigress/3.1
 ENV PATH=$PATH:/opt/tigress/3.1
@@ -347,11 +380,13 @@ RUN cd /opt && \
 # install rappel for emulateing assembly instructions
 RUN cd /opt/ && \
     git clone https://github.com/yrp604/rappel && \
-     cd rappel && CC=clang make
-
+    cd rappel && CC=clang make
 ENV PATH=$PATH:/opt/rappel/bin/
 
+################################################################################
 ## pwn installs ##
+################################################################################
+
 
 # install pwndbg (gdb enhancement)
 RUN cd /opt/ && git clone https://github.com/pwndbg/pwndbg && \
@@ -372,47 +407,45 @@ RUN cd /opt/ && \
 RUN cd /opt/ && \
     git clone --depth 1 https://github.com/shellphish/how2heap how2heap
 
-
 # install pwninit for patching bins for ctfs     
 RUN wget -O /bin/pwninit https://github.com/io12/pwninit/releases/download/3.3.0/pwninit && \
     chmod +x /bin/pwninit 
+
+# Pwn College: Pwn Kernel (https://github.com/pwncollege/)
+RUN cd /opt && git clone https://github.com/pwncollege/pwnkernel
+#RUN cd /opt/pwnkernel/ && ./build.sh
+
+################################################################################
+##  cross-compilation stuff
+################################################################################
 
 ## some cross-compilation stuff
 RUN dpkg --add-architecture armhf && \
     dpkg --add-architecture armel && \
     dpkg --add-architecture i386 && \
     apt-get update -y && \
-    apt-get -y install libssl-dev:armhf libssl-dev:armel libc6:i386 libncurses5:i386 libstdc++6:i386 libc6-dev-i386 \
-    gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu && \
-    rm -rf /var/lib/apt/lists/*
-
-# install support for other architectures
-RUN apt-get update -qq -y && apt-get install -y \
-    gcc-aarch64-linux-gnu \
-    binutils-aarch64-linux-gnu && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get -y install libssl-dev:armhf \
+                       libssl-dev:armel \
+                       libc6:i386 \
+                       libncurses5:i386 \
+                       libstdc++6:i386 \
+                       libc6-dev-i386 \
+                       gcc-aarch64-linux-gnu \
+		       gcc-arm-linux-gnueabi \
+   		       gcc-arm-linux-gnueabihf \
+                       binutils-aarch64-linux-gnu && \
+                       rm -rf /var/lib/apt/lists/*
 
 # downloads libc-database
-RUN cd /opt/ && git clone https://github.com/niklasb/libc-database && cd /opt/libc-database && ./get ubuntu debian
-
-#### - Flowmeter Stuff for ML Classifier of Network Flows -- ####
-
-# python3 pip installs
-RUN python3 -m pip install --no-cache-dir \
-    scikit-learn \ 
-    GitPython \
-    semantic-version \
-    pandas
-
-# install zeek
 RUN cd /opt/ && \
-    git clone --recursive https://github.com/zeek/zeek && \
-    cd zeek && \
-    ./configure && \
-    make && \
-    make install
+    git clone https://github.com/niklasb/libc-database && \
+    cd /opt/libc-database &&\
+    ./get ubuntu 
 
+################################################################################
 # resolves issue with local environment
+################################################################################
+
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=en_US.UTF-8
@@ -423,12 +456,8 @@ ENV LANG en_US.UTF-8
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.4/zsh-in-docker.sh)" -- \
     -t crunch
 
-# fixed in recent release
-# temp fix for pwntools asm linker issues
-# COPY asm.py /usr/local/lib/python3.10/dist-packages/pwnlib/asm.py
-
-
 WORKDIR /root/workspace
 RUN cd /root/workspace
+RUN chsh -s /bin/zsh
+
 ENTRYPOINT ["/bin/zsh"]
-RUN apt install passwd -y ; chsh -s /bin/zsh
