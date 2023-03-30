@@ -131,6 +131,7 @@ RUN apt-get install -y --ignore-missing afl-* \
     tempest-for-eliza \
     tmux \
     u-boot-tools \
+    vim \
     veil \
     veil-evasion \
     xxd \
